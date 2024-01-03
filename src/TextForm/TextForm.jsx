@@ -71,6 +71,7 @@ function TextArea(props) {
       textref.current?.select()
       window.navigator.clipboard.writeText(text)
       props.Showalert("Text Copied To ClipBoard","info")
+      console.log("hello")
     }
 
 
