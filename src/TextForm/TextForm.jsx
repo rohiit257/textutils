@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -12,6 +12,7 @@ import Card from 'react-bootstrap/Card';
 function TextArea(props) {
     const [text,Settext] = useState("Computer Science is a dynamic field that explores the theory and application of computation. It encompasses diverse areas such as algorithms, artificial intelligence, data structures, and software development. Computer scientists design innovative solutions to complex problems, pushing the boundaries of technology. From developing cutting-edge software to understanding the intricacies of machine learning, Computer Science plays a pivotal role in shaping the digital landscape of the modern world.")
     const [txtlabel] = useState("Enter Your Text")
+    const textref = useRef(null)
     
 
 
@@ -66,6 +67,12 @@ function TextArea(props) {
         props.Showalert("Text Cleared.","warning")
     }
 
+    const copytoclipboard = ()=>{
+      textref.current?.select()
+      window.navigator.clipboard.writeText(text)
+      props.Showalert("Text Copied To ClipBoard","info")
+    }
+
 
 
 
@@ -85,6 +92,7 @@ function TextArea(props) {
           style={{ height: '200px' }}
           value={text}
           onChange={Uponchange}
+          ref={textref}
         />
       </FloatingLabel>
       <Button className='btn' variant="outline-primary" onClick={Uppercase}>UpperCase</Button>{' '}
@@ -92,6 +100,7 @@ function TextArea(props) {
       <Button className='btn' variant="outline-primary" onClick={removespaces}>Remove Spaces</Button>{' '}
       <Button className='btn' variant="outline-primary" onClick={handleDownloadClick}>Download Text</Button>{' '}
       <Button className='btn' variant="outline-primary" onClick={clear}>Clear</Button>{' '}
+      <Button className='btn' variant="outline-primary" onClick={copytoclipboard}>Copy Text</Button>{' '}
 
       <div className="container my-5">
         
